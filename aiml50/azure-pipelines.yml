@@ -36,7 +36,7 @@ steps:
       subscription_id=$(az account show --query id -o tsv)
       azure_storage_account="$(session)$(event)storage"
       workspace="$(session)$(event)"
-      azure_storage_key=$(az storage account keys list --account-name $azure_storage_account --resource-group $(resource_group) --query '[].value | [0]' -o tsv )
+      azure_storage_key=$(az storage account keys list --account-name $azure_storage_account --resource-group "aiml50" --query '[].value | [0]' -o tsv )
       echo 'running python script:'
       python setup_pipeline.py -d $(datastorename) -p $(datastorepath) -c $(computetarget) -v $(Build.BuildNumber) -s $subscription_id -r $(resource_group) -a $azure_storage_account -k $azure_storage_key -w $workspace
 
